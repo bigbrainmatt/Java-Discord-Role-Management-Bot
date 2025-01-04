@@ -1,3 +1,4 @@
+import general.about;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -10,11 +11,7 @@ import java.io.IOException;
 
 public class main {
     private final ShardManager shardManager;
-
-
     Dotenv dotenv = Dotenv.load();
-
-    // Get the Discord token
     private final String token = dotenv.get("DISCORD_TOKEN");
     public main() throws LoginException {
 
@@ -26,6 +23,8 @@ public class main {
         shardManager = builder.build();
 
         shardManager.addEventListener(
+                new commandManager(),
+                new about()
 
         );
 
