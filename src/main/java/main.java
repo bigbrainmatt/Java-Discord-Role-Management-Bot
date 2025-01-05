@@ -2,6 +2,7 @@ import general.about;
 import general.StartAndEnd;
 import general.permissions;
 import io.github.cdimascio.dotenv.Dotenv;
+import modderation.ban;
 import modderation.kick;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -29,6 +30,7 @@ public class main {
                 new commandManager(),
                 new about(),
                 new kick(),
+                new ban(),
                 new permissions(),
                 new StartAndEnd()
 
