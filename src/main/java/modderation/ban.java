@@ -1,4 +1,4 @@
-package general;
+package modderation;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
