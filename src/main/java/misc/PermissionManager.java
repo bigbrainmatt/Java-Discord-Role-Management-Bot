@@ -161,5 +161,29 @@ public class PermissionManager {
         }
         return "0";
     }
+    public static void copyValue(String guildId, String sourceId, String targetId) throws IOException, CsvException {
+        ensureCsvExists(guildId);
+        List<String[]> rows = readCsv(getCsvPath(guildId));
+
+        String[] sourceRow = null;
+        String[] targetRow = null;
+
+        for (String[] row : rows) {
+            if (row[0].equals(sourceId)) {
+                sourceRow = row;
+            } else if (row[0].equals(targetId)) {
+                targetRow = row;
+            }
+        }
+
+        if (sourceRow != null && targetRow != null) {
+            for (int i = 2; i < sourceRow.length; i++) {
+                targetRow[i] = sourceRow[i];
+            }
+            rows.set(rows.indexOf(targetRow), targetRow);
+            writeCsv(getCsvPath(guildId), rows);
+        }
+    }
+
 
 }

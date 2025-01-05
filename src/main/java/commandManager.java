@@ -1,4 +1,5 @@
-import general.permissions;
+import roleRelated.copyPerms;
+import roleRelated.permissions;
 import modderation.ban;
 import modderation.kick;
 import modderation.unban;
@@ -46,6 +47,11 @@ public class commandManager extends ListenerAdapter {
                 .addOptions(new permissions().getOptions().get(1))
                 .addOptions(new permissions().getOptions().get(2))
                 .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
+
+        // Ban Cmd
+        commandData.add(Commands.slash("copyperms", "Copy a roles perms from one onto another")
+                .addOptions(new copyPerms().getOptions().get(0))
+                .addOptions(new copyPerms().getOptions().get(1)));
 
         event.getGuild().updateCommands().addCommands(commandData).queue();
     }

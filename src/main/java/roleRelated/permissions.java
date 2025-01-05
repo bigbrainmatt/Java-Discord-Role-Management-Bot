@@ -1,4 +1,4 @@
-package general;
+package roleRelated;
 
 import com.opencsv.exceptions.CsvException;
 import net.dv8tion.jda.api.EmbedBuilder;

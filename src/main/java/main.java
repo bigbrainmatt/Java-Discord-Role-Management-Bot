@@ -1,6 +1,7 @@
 import general.about;
 import general.StartAndEnd;
-import general.permissions;
+import roleRelated.copyPerms;
+import roleRelated.permissions;
 import io.github.cdimascio.dotenv.Dotenv;
 import modderation.ban;
 import modderation.kick;
@@ -34,7 +35,8 @@ public class main {
                 new ban(),
                 new unban(),
                 new permissions(),
-                new StartAndEnd()
+                new StartAndEnd(),
+                new copyPerms()
 
         );
 
