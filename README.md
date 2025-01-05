@@ -5,16 +5,6 @@ This bot is a personal project designed to showcase my programming skills and is
 
 ---
 
-### Self-Hosting and Data Storage
-
-- **Self-Hosted**: The bot is designed to be run on your own server.
-- **Data Storage**:
-    - All data is stored locally using JSON and CSV files.
-    - These files are automatically created when the bot runs.
-    - No pre-included data is provided to ensure privacy and flexibility.
-
----
-
 ### Current Dependencies
 
 The bot utilizes the following libraries:
