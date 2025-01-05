@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import roleRelated.assignMultiRole;
+import general.ban;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class main {
         shardManager.addEventListener(
                 new commandManager(),
                 new about(),
-                new assignMultiRole()
+                new ban()
 
         );
 
