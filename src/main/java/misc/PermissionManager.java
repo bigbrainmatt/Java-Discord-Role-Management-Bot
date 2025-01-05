@@ -10,7 +10,7 @@ public class PermissionManager {
             "kick_permissions", "ban_permissions", "unban_permissions",
             "mute_permissions", "mass_tempRole_permissions", "embed_creator",
             "manage_linked_role", "manage_role_permissions", "create_role",
-            "giveaway_access", "guild_admin"
+            "giveaway_access", "guild_admin", "SERVER_LOG_CHAN"
     };
 
     public static boolean deleteCsv(String guildId) {
@@ -59,26 +59,11 @@ public class PermissionManager {
         return headers.indexOf(permission);
     }
 
-    public static Map<String, String> getPermissions(String guildId, String id) throws IOException, CsvException {
-        ensureCsvExists(guildId);
-        List<String[]> rows = readCsv(getCsvPath(guildId));
-        for (String[] row : rows) {
-            if (row[0].equals(id)) {
-                Map<String, String> permissionsMap = new HashMap<>();
-                for (int i = 2; i < row.length; i++) {
-                    permissionsMap.put(rows.get(0)[i], row[i]);
-                }
-                return permissionsMap;
-            }
-        }
-        return null;
-    }
-
     public static boolean doesGuildCsvExist(String guildId) {
         return new File(getCsvPath(guildId)).exists();
     }
 
-    public static void addPermission(String guildId, String id, String permission, int value) throws IOException, CsvException {
+    public static void addPermission(String guildId, String id, String permission, String value) throws IOException, CsvException {
         ensureCsvExists(guildId);
         List<String[]> rows = readCsv(getCsvPath(guildId));
         List<String> headers = new ArrayList<>(Arrays.asList(rows.get(0)));
@@ -160,60 +145,21 @@ public class PermissionManager {
         return false;
     }
 
-    public static void setGuildAdmin(String guildId, String id) throws IOException, CsvException {
+    public static String getPermissionValue(String guildId, String id, String permission) throws IOException, CsvException {
         ensureCsvExists(guildId);
         List<String[]> rows = readCsv(getCsvPath(guildId));
+        List<String> headers = Arrays.asList(rows.get(0));
 
-        boolean updated = false;
         for (int i = 1; i < rows.size(); i++) {
             String[] row = rows.get(i);
             if (row[0].equals(id)) {
-                Arrays.fill(row, "0");  // Set all values to "0"
-                row[0] = id;  // Set the ID in the first column
-                Arrays.fill(row, 1, row.length, "1");  // Set all permissions to "1"
-                rows.set(i, row);
-                updated = true;
-                break;
+                int permIndex = getPermissionIndex(headers, permission);
+                if (permIndex != -1) {
+                    return row[permIndex];
+                }
             }
         }
-
-        if (!updated) {
-            String[] headers = rows.get(0);
-            String[] newRow = new String[headers.length];
-            Arrays.fill(newRow, "0");  // Fill all columns with "0"
-            newRow[0] = id;  // Set the ID in the first column
-            Arrays.fill(newRow, 1, newRow.length, "1");  // Set all permissions to "1"
-            rows.add(newRow);
-        }
-
-        writeCsv(getCsvPath(guildId), rows);
+        return "0";
     }
 
-
-    public static void removeGuildAdmin(String guildId, String id) throws IOException, CsvException {
-        ensureCsvExists(guildId);
-        List<String[]> rows = readCsv(getCsvPath(guildId));
-
-        boolean updated = false;
-        for (int i = 1; i < rows.size(); i++) {
-            String[] row = rows.get(i);
-            if (row[0].equals(id)) {
-                Arrays.fill(row, "0");
-                row[0] = id;
-                rows.set(i, row);
-                updated = true;
-                break;
-            }
-        }
-
-        if (!updated) {
-            String[] headers = rows.get(0);
-            String[] newRow = new String[headers.length];
-            Arrays.fill(newRow, "1");
-            newRow[0] = id;
-            rows.add(newRow);
-        }
-
-        writeCsv(getCsvPath(guildId), rows);
-    }
 }
