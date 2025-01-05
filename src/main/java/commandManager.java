@@ -1,6 +1,7 @@
 import general.permissions;
 import modderation.ban;
 import modderation.kick;
+import modderation.unban;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -33,6 +34,11 @@ public class commandManager extends ListenerAdapter {
         commandData.add(Commands.slash("ban", "Ban a member form the server")
                 .addOptions(new ban().getOptions().get(0))
                 .addOptions(new ban().getOptions().get(1)));
+
+        // Ban Cmd
+        commandData.add(Commands.slash("unban", "Unban a member form the server")
+                .addOptions(new unban().getOptions().get(0))
+                .addOptions(new unban().getOptions().get(1)));
 
         // Permissions Cmd
         commandData.add(Commands.slash("permissions", "Set permissions")

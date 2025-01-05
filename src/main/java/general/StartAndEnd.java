@@ -31,7 +31,10 @@ public class StartAndEnd extends ListenerAdapter {
         });
 
         TextChannel chan = event.getGuild().createTextChannel(event.getJDA().getSelfUser().getName() +" logs").complete();
-        chan.getManager().putPermissionOverride(event.getGuild().getOwner(), EnumSet.of(Permission.VIEW_CHANNEL), null).complete();
+        chan.getManager()
+                .putPermissionOverride(event.getGuild().getOwner(), EnumSet.of(Permission.VIEW_CHANNEL), null)
+                .putPermissionOverride(event.getGuild().getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
+                .complete();
 
         try {
             addPermission(event.getGuild().getId(),"0","SERVER_LOG_CHAN", chan.getId());

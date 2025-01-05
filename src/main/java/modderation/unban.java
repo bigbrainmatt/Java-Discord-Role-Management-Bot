@@ -14,39 +14,38 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static misc.PermissionManager.getPermissionValue;
 import static misc.PermissionManager.hasPermission;
 import static misc.miscInfo.*;
 
-public class ban extends ListenerAdapter {
-    private static User bannedUser;
-    private static String reason;
-    private static User punisher;
-
+public class unban extends ListenerAdapter {
+    private User bannedU;
+    private String reason;
+    private User savior;
     public List<OptionData> getOptions() {
         List<OptionData> data = new ArrayList<>();
         data.add(new OptionData(OptionType.USER,"member", "member to ban", true));
         data.add(new OptionData(OptionType.STRING,"reason", "reason for ban", true));
         return data;
     }
+
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-        if (event.getName().equalsIgnoreCase("ban")) {
+        if (event.getName().equalsIgnoreCase("unban")) {
             try {
-                if(hasPermission(event.getGuild().getId(), event.getUser().getId(), "ban_permissions") || hasPermission(event.getGuild().getId(), event.getUser().getId(), "guild_admin")) {
-                    bannedUser = event.getOption("member").getAsUser();
+                if(hasPermission(event.getGuild().getId(), event.getUser().getId(), "unban_permissions") || hasPermission(event.getGuild().getId(), event.getUser().getId(), "guild_admin")) {
+                    bannedU = event.getOption("member").getAsUser();
                     reason = event.getOption("reason").getAsString();
-                    punisher = event.getUser();
+                    savior = event.getUser();
 
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("Kick member");
-                    eb.setDescription("Are you sure you would like to ban " + bannedUser.getAsMention() + "\n For **" + reason + "**");
+                    eb.setTitle("Unban member");
+                    eb.setDescription("Are you sure you would like to unban " + bannedU.getAsMention() + "\n For **" + reason + "**");
 
                     event.replyEmbeds(eb.build())
-                            .addActionRow(net.dv8tion.jda.api.interactions.components.buttons.Button.success("banCon","Confirm"), Button.danger("banDeny", "Cancel")).queue();
+                            .addActionRow(net.dv8tion.jda.api.interactions.components.buttons.Button.success("unbanCon","Confirm"), Button.danger("unbanDeny", "Cancel")).queue();
 
                 } else {
                     event.replyEmbeds(getDenyEmbed().build()).setEphemeral(true).queue();
@@ -61,14 +60,14 @@ public class ban extends ListenerAdapter {
 
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event) {
-        if((punisher == event.getUser()) && (event.getComponentId().equalsIgnoreCase("banCon"))) {
+        if((savior == event.getUser()) && (event.getComponentId().equalsIgnoreCase("unbanCon"))) {
             event.getInteraction().getMessage().delete().queue();
             EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Member Banned");
+            eb.setTitle("Member Unbanned");
             eb.setColor(getBotColor());
-            eb.setDescription(bannedUser.getAsMention() + " has been banned by " + event.getUser().getAsMention() + " for **" + reason + "**");
+            eb.setDescription(bannedU.getAsMention() + " has been unbanned by " + event.getUser().getAsMention() + " for **" + reason + "**");
 
-            event.getGuild().ban(bannedUser,0, TimeUnit.DAYS).reason(reason).complete();
+            event.getGuild().unban(bannedU).reason(reason).complete();
 
             eb.setFooter(getTime(), event.getJDA().getSelfUser().getAvatarUrl());
             String chan = null;
@@ -82,7 +81,7 @@ public class ban extends ListenerAdapter {
             }
 
             event.getGuild().getTextChannelById(chan).sendMessageEmbeds(eb.build()).queue();
-        } if((punisher == event.getUser()) && (event.getComponentId().equalsIgnoreCase("banDeny"))) {
+        } if((savior == event.getUser()) && (event.getComponentId().equalsIgnoreCase("unbanDeny"))) {
             event.getInteraction().getMessage().delete().complete();
         }
     }

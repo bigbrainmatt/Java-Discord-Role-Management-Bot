@@ -4,6 +4,7 @@ import general.permissions;
 import io.github.cdimascio.dotenv.Dotenv;
 import modderation.ban;
 import modderation.kick;
+import modderation.unban;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
@@ -31,6 +32,7 @@ public class main {
                 new about(),
                 new kick(),
                 new ban(),
+                new unban(),
                 new permissions(),
                 new StartAndEnd()
 
