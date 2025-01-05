@@ -1,4 +1,3 @@
-"ID","Type","kick_permissions","ban_permissions","unban_permissions","mute_permissions","mass_tempRole_permissions","embed_creator","manage_linked_role","manage_role_permissions","create_role","giveaway_access","guild_admin","SERVER_LOG_CHAN"
-"0","0","0","0","0","0","0","0","0","0","0","0","0","1325431459602763789"
-"439958339493953538","0","0","0","0","0","0","0","0","0","0","0","1","0"
-"1315521665827999774","0","0","0","0","0","0","0","0","0","0","0","0","0"
+"ID","Type","kick_permissions","ban_permissions","unban_permissions","mute_permissions","mass_tempRole_permissions","embed_creator","manage_linked_role","manage_role_permissions","create_role","giveaway_access","guild_admin","SERVER_LOG_CHAN","ROLE_REC_CHAN"
+"0","0","0","0","0","0","0","0","0","0","0","0","0","1325473448948138097","1325286946507067443"
+"439958339493953538","0","0","0","0","0","0","0","0","0","0","0","1","0","0"

@@ -10,7 +10,7 @@ public class PermissionManager {
             "kick_permissions", "ban_permissions", "unban_permissions",
             "mute_permissions", "mass_tempRole_permissions", "embed_creator",
             "manage_linked_role", "manage_role_permissions", "create_role",
-            "giveaway_access", "guild_admin", "SERVER_LOG_CHAN"
+            "giveaway_access", "guild_admin", "SERVER_LOG_CHAN", "ROLE_REC_CHAN"
     };
 
     public static boolean deleteCsv(String guildId) {

@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import roleRelated.setRequestChannel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,14 @@ public class commandManager extends ListenerAdapter {
         // Ban Cmd
         commandData.add(Commands.slash("copyperms", "Copy a roles perms from one onto another")
                 .addOptions(new copyPerms().getOptions().get(0))
-                .addOptions(new copyPerms().getOptions().get(1)));
+                .addOptions(new copyPerms().getOptions().get(1))
+                .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
+
+        // Role request chan Cmd
+        commandData.add(Commands.slash("setrequestchannel", "Set the channel that the role request will be sent to")
+                .addOptions(new setRequestChannel().getOptions().get(0))
+                .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
+
 
         event.getGuild().updateCommands().addCommands(commandData).queue();
     }
