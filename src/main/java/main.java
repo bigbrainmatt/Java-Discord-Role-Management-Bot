@@ -1,6 +1,7 @@
 import general.about;
 import general.StartAndEnd;
 import roleRelated.copyPerms;
+import roleRelated.listPerms;
 import roleRelated.permissions;
 import io.github.cdimascio.dotenv.Dotenv;
 import modderation.ban;
@@ -38,7 +39,8 @@ public class main {
                 new permissions(),
                 new StartAndEnd(),
                 new copyPerms(),
-                new setRequestChannel()
+                new setRequestChannel(),
+                new listPerms()
 
         );
 

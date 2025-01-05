@@ -1,4 +1,5 @@
 import roleRelated.copyPerms;
+import roleRelated.listPerms;
 import roleRelated.permissions;
 import modderation.ban;
 import modderation.kick;
@@ -58,6 +59,12 @@ public class commandManager extends ListenerAdapter {
         // Role request chan Cmd
         commandData.add(Commands.slash("setrequestchannel", "Set the channel that the role request will be sent to")
                 .addOptions(new setRequestChannel().getOptions().get(0))
+                .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
+
+        // List all rol permissions
+        commandData.add(Commands.slash("listperms", "List out all permissions to a role or user")
+                .addOptions(new listPerms().getOptions().get(0))
+                .addOptions(new listPerms().getOptions().get(1))
                 .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
 
 
