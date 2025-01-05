@@ -1,3 +1,4 @@
+import general.permissions;
 import modderation.ban;
 import modderation.kick;
 import modderation.unban;
@@ -38,6 +39,13 @@ public class commandManager extends ListenerAdapter {
         commandData.add(Commands.slash("kick", "Kick a user")
                 .addOptions(new kick().getOptions().get(0)).addOptions(new kick().getOptions().get(1))
                 .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.KICK_MEMBERS)));
+
+        // Permissions Cmd
+        commandData.add(Commands.slash("permissions", "Set permissions")
+                .addOptions(new permissions().getOptions().get(0))
+                .addOptions(new permissions().getOptions().get(1))
+                .addOptions(new permissions().getOptions().get(2))
+                .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
 
 
         event.getGuild().updateCommands().addCommands(commandData).queue();

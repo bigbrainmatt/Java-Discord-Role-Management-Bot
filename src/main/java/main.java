@@ -1,4 +1,6 @@
 import general.about;
+import general.StartAndEnd;
+import general.permissions;
 import io.github.cdimascio.dotenv.Dotenv;
 import modderation.unban;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -28,7 +30,9 @@ public class main {
                 new commandManager(),
                 new about(),
                 new ban(),
-                new unban()
+                new unban(),
+                new permissions(),
+                new StartAndEnd()
 
         );
 
