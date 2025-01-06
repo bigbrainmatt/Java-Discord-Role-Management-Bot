@@ -39,7 +39,6 @@ public class main {
                 new setRequestChannel(),
                 new listPerms(),
                 new listallperms()
-
         );
 
     }
