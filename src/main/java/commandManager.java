@@ -1,7 +1,5 @@
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
-import roleRelated.copyPerms;
-import roleRelated.listPerms;
-import roleRelated.permissions;
+import roleRelated.*;
 import modderation.ban;
 import modderation.kick;
 import modderation.unban;
@@ -11,7 +9,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
-import roleRelated.setRequestChannel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,6 +67,12 @@ public class commandManager extends ListenerAdapter {
         commandData.add(Commands.slash("listallperms", "List all perms given to any user/role")
                 .addOptions(new listPerms().getOptions().get(1))
                 .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
+
+        // List all rol permissions
+        commandData.add(Commands.slash("viewusers", "View all members with the selected role")
+                .addOptions(new viewUsers().getOptions().get(0))
+                .addOptions(new viewUsers().getOptions().get(1))
+        );
 
         return commandData;
     }

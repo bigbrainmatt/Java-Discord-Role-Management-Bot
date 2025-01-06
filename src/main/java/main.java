@@ -1,5 +1,7 @@
 import general.about;
 import general.StartAndEnd;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import roleRelated.*;
 import io.github.cdimascio.dotenv.Dotenv;
 import modderation.ban;
@@ -22,9 +24,11 @@ public class main {
 
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(token);
         builder.setStatus(OnlineStatus.ONLINE);
-        builder.enableIntents(GatewayIntent.DIRECT_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES);
+        builder.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES);
         builder.setEventPassthrough(true);
-        builder.enableCache(CacheFlag.ONLINE_STATUS);
+        builder.setMemberCachePolicy(MemberCachePolicy.ALL);
+        builder.setChunkingFilter(ChunkingFilter.ALL);
+        builder.enableCache(CacheFlag.ROLE_TAGS);
         shardManager = builder.build();
 
         shardManager.addEventListener(
@@ -38,7 +42,8 @@ public class main {
                 new copyPerms(),
                 new setRequestChannel(),
                 new listPerms(),
-                new listallperms()
+                new listallperms(),
+                new viewUsers()
         );
 
     }
