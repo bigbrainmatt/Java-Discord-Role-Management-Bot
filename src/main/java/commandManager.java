@@ -94,6 +94,12 @@ public class commandManager extends ListenerAdapter {
         commandData.add(Commands.slash("editembed", "Create an embed")
                 .addOptions(new editEmbed().getOptions().get(0))
         );
+        // Remove Manger Cmd
+        commandData.add(Commands.slash("removemanager", "Create an embed")
+                .addOptions(new mangerRemove().getOptions().get(0))
+                .addOptions(new mangerRemove().getOptions().get(1))
+        );
+
 
         return commandData;
     }

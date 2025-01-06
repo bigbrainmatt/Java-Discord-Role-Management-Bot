@@ -159,4 +159,36 @@ public class ManagerManager {
 
         return -1; // Return -1 if no empty index is found
     }
+
+    public static void removeManagerFromRole(String guildId, String roleId, int managerIndex) throws IOException, CsvException {
+        // Ensure the CSV file exists
+        ensureCsvExists(guildId);
+        String path = getCsvPath(guildId);
+        List<String[]> rows = readCsv(path);
+
+        // Validate the manager index
+        if (managerIndex < 1 || managerIndex >= HEADERS.length) {
+            throw new IllegalArgumentException("Invalid manager index. Must be between 1 and " + (HEADERS.length - 1));
+        }
+
+        boolean updated = false;
+
+        // Iterate through the rows and find the matching role
+        for (int i = 1; i < rows.size(); i++) { // Skip header row
+            String[] row = rows.get(i);
+            if (row[0].equals(roleId)) {
+                // Remove the manager ID from the specified index
+                row[managerIndex] = "";
+                updated = true;
+                break;
+            }
+        }
+
+        if (updated) {
+            // Write the updated data back to the CSV
+            writeCsv(path, rows);
+        } else {
+            throw new IOException("Role not found in the CSV file: " + roleId);
+        }
+    }
 }

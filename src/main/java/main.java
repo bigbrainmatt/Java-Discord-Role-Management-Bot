@@ -50,7 +50,8 @@ public class main {
                 new roleInfo(),
                 new setManager(),
                 new createEmbed(),
-                new editEmbed()
+                new editEmbed(),
+                new mangerRemove()
         );
 
     }
