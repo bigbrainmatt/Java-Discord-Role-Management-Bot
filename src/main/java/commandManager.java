@@ -74,6 +74,12 @@ public class commandManager extends ListenerAdapter {
                 .addOptions(new viewUsers().getOptions().get(1))
         );
 
+        // List role info
+        commandData.add(Commands.slash("roleinfo", "View infomation of a role")
+                .addOptions(new viewUsers().getOptions().get(0))
+                .addOptions(new viewUsers().getOptions().get(1))
+        );
+
         return commandData;
     }
 

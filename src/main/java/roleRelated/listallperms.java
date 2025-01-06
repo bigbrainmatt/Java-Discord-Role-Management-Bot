@@ -43,7 +43,7 @@ public class listallperms extends ListenerAdapter {
                     embeds.add(eb.build());
 
                     EmbedBuilder ebb;
-                    try (CSVReader reader = new CSVReader(new FileReader("guilds/" + event.getGuild().getId() + ".csv"))) {
+                    try (CSVReader reader = new CSVReader(new FileReader("guilds/perms/" + event.getGuild().getId() + ".csv"))) {
                         String[] row;
                         int rowIndex = 0;
 

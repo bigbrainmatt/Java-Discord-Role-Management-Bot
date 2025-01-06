@@ -37,14 +37,17 @@ public class viewUsers extends ListenerAdapter {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(getBotColor());
                     eb.setTitle("Memebers");
-                    String dis = "Users with " + role.getAsMention() + " role\n";
-
+                    String dis = "";
+                    eb.addField("Role Name", role.getAsMention(),true);
+                    eb.addField("Role ID", "``" + role.getId() + "``",true);
                     List<Member> members = event.getGuild().getMembersWithRoles(role);
+
+                    eb.addField("Users", "``" +members.size()+"``",true);
 
                     for (Member member : members) {
                         dis+= member.getAsMention() +"\n";
                     }
-                    eb.setDescription(dis);
+                    eb.addField("Users",dis,false);
 
                     if (event.getOption("hidden").getAsBoolean()) {
                         event.replyEmbeds(eb.build()).setEphemeral(true).queue();

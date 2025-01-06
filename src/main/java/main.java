@@ -43,7 +43,8 @@ public class main {
                 new setRequestChannel(),
                 new listPerms(),
                 new listallperms(),
-                new viewUsers()
+                new viewUsers(),
+                new roleInfo()
         );
 
     }

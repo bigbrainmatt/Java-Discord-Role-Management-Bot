@@ -28,7 +28,7 @@ public class PermissionManager {
     }
 
     private static String getCsvPath(String guildId) {
-        return "guilds/" + guildId + ".csv";
+        return "guilds/perms/" + guildId + ".csv";
     }
 
     private static List<String[]> readCsv(String path) throws IOException, CsvException {
