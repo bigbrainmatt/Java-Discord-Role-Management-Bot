@@ -1,3 +1,5 @@
+import embed.createEmbed;
+import embed.editEmbed;
 import general.about;
 import general.StartAndEnd;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
@@ -36,6 +38,7 @@ public class main {
                 new about(),
                 new kick(),
                 new ban(),
+                new ban(),
                 new unban(),
                 new permissions(),
                 new StartAndEnd(),
@@ -44,7 +47,10 @@ public class main {
                 new listPerms(),
                 new listallperms(),
                 new viewUsers(),
-                new roleInfo()
+                new roleInfo(),
+                new setManager(),
+                new createEmbed(),
+                new editEmbed()
         );
 
     }

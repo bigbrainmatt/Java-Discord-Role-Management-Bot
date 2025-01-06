@@ -40,3 +40,4 @@ build/
 .env
 .csv
 .json
+/guilds

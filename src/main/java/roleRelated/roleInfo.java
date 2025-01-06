@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static misc.ManagerManager.getFormattedManagerIds;
 import static misc.PermissionManager.hasPermission;
 import static misc.miscInfo.getBotColor;
 import static misc.miscInfo.getDenyEmbed;
@@ -45,6 +46,10 @@ public class roleInfo extends ListenerAdapter {
                     eb.addField("Users", "``" +members.size()+"``",true);
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                     eb.addField("Creation Date",role.getTimeCreated().format(formatter),true);
+                    eb.addField("Managers",
+                            getFormattedManagerIds(event.getGuild().getId(), role.getId())
+                            ,true);
+
 
                     if (event.getOption("hidden").getAsBoolean()) {
                         event.replyEmbeds(eb.build()).setEphemeral(true).queue();

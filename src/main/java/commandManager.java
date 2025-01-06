@@ -1,3 +1,4 @@
+import embed.editEmbed;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import roleRelated.*;
 import modderation.ban;
@@ -78,6 +79,20 @@ public class commandManager extends ListenerAdapter {
         commandData.add(Commands.slash("roleinfo", "View infomation of a role")
                 .addOptions(new viewUsers().getOptions().get(0))
                 .addOptions(new viewUsers().getOptions().get(1))
+        );
+
+        // setManager Cmd
+        commandData.add(Commands.slash("setmanager", "Set role manager")
+                .addOptions(new setManager().getOptions().get(0))
+                .addOptions(new setManager().getOptions().get(1))
+        );
+
+        // Create Embed Cmd
+        commandData.add(Commands.slash("createembed", "Create an embed"));
+
+        // Edit Embed Cmd
+        commandData.add(Commands.slash("editembed", "Create an embed")
+                .addOptions(new editEmbed().getOptions().get(0))
         );
 
         return commandData;

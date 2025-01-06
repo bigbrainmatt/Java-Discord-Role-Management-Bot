@@ -1,6 +1,7 @@
 package general;
 
 import com.opencsv.exceptions.CsvException;
+import misc.ManagerManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -20,6 +21,11 @@ public class StartAndEnd extends ListenerAdapter {
     public void onGuildJoin(GuildJoinEvent event) {
 
         String owner = event.getGuild().getOwner().getId();
+        try {
+            ensureCsvExists(event.getGuild().getId());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         event.getJDA().getUserById(owner).openPrivateChannel().queue(privateChannel -> {
             EmbedBuilder eb = new EmbedBuilder();
@@ -49,4 +55,6 @@ public class StartAndEnd extends ListenerAdapter {
     public void onGuildLeave(GuildLeaveEvent event) {
         deleteCsv(event.getGuild().getId());
     }
+
+
 }
