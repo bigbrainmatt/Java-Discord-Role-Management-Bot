@@ -2,6 +2,8 @@ package misc;
 
 import com.opencsv.*;
 import com.opencsv.exceptions.CsvException;
+import com.opencsv.exceptions.CsvValidationException;
+
 import java.io.*;
 import java.util.*;
 
@@ -185,5 +187,29 @@ public class PermissionManager {
         }
     }
 
+    public static List<String> getIdsFromCsv(String filePath) {
+        List<String> ids = new ArrayList<>();
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
+            String[] row;
+            int rowIndex = 0;
+
+            while ((row = reader.readNext()) != null) {
+                rowIndex++;
+
+                // Skip the first two rows
+                if (rowIndex <= 2) {
+                    continue;
+                }
+
+                // Add the first value (ID) to the list if the row is not empty
+                if (row.length > 0) {
+                    ids.add(row[0]);
+                }
+            }
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+        return ids;
+    }
 
 }

@@ -36,11 +36,11 @@ public class kick extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         if (event.getName().equalsIgnoreCase("kick")) {
+            kickedU = event.getOption("member").getAsUser();
+            reason = event.getOption("reason").getAsString();
+            punisher = event.getUser();
             try {
                 if(hasPermission(event.getGuild().getId(), event.getUser().getId(), "kick_permissions") || hasPermission(event.getGuild().getId(), event.getUser().getId(), "guild_admin")) {
-                    kickedU = event.getOption("member").getAsUser();
-                    reason = event.getOption("reason").getAsString();
-                    punisher = event.getUser();
 
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.red);
@@ -52,6 +52,7 @@ public class kick extends ListenerAdapter {
 
                 } else {
                     event.replyEmbeds(getDenyEmbed().build()).setEphemeral(true).queue();
+                    embedLog(event,true,"Kick Member", punisher.getAsMention() + " has attempted to kick " + kickedU.getAsMention() + " for **" + reason + "**");
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -65,25 +66,9 @@ public class kick extends ListenerAdapter {
     public void onButtonInteraction(ButtonInteractionEvent event) {
         if((punisher == event.getUser()) && (event.getComponentId().equalsIgnoreCase("kickCon"))) {
             event.getInteraction().getMessage().delete().queue();
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Member Kicked");
-            eb.setColor(getBotColor());
-            eb.setDescription(kickedU.getAsMention() + " has been kicked by " + event.getUser().getAsMention() + " for **" + reason + "**");
 
-            event.getGuild().kick(kickedU,reason).complete();
-
-            eb.setFooter(getTime(), event.getJDA().getSelfUser().getAvatarUrl());
-            String chan = null;
-
-            try {
-                chan = getPermissionValue(event.getGuild().getId(), "0", "SERVER_LOG_CHAN");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (CsvException e) {
-                throw new RuntimeException(e);
-            }
-
-            event.getGuild().getTextChannelById(chan).sendMessageEmbeds(eb.build()).queue();
+            event.getGuild().kick(kickedU).queue();
+            embedLog(event,false,"Kick Member", punisher.getAsMention() + " has kick " + kickedU.getAsMention() + " for **" + reason + "**");
         } if((punisher == event.getUser()) && (event.getComponentId().equalsIgnoreCase("kickDeny"))) {
             event.getInteraction().getMessage().delete().complete();
         }

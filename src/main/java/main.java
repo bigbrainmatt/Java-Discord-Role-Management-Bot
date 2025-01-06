@@ -1,8 +1,6 @@
 import general.about;
 import general.StartAndEnd;
-import roleRelated.copyPerms;
-import roleRelated.listPerms;
-import roleRelated.permissions;
+import roleRelated.*;
 import io.github.cdimascio.dotenv.Dotenv;
 import modderation.ban;
 import modderation.kick;
@@ -12,7 +10,6 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import roleRelated.setRequestChannel;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -40,7 +37,8 @@ public class main {
                 new StartAndEnd(),
                 new copyPerms(),
                 new setRequestChannel(),
-                new listPerms()
+                new listPerms(),
+                new listallperms()
 
         );
 

@@ -33,11 +33,11 @@ public class unban extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         if (event.getName().equalsIgnoreCase("unban")) {
+            bannedU = event.getOption("member").getAsUser();
+            reason = event.getOption("reason").getAsString();
+            savior = event.getUser();
             try {
                 if(hasPermission(event.getGuild().getId(), event.getUser().getId(), "unban_permissions") || hasPermission(event.getGuild().getId(), event.getUser().getId(), "guild_admin")) {
-                    bannedU = event.getOption("member").getAsUser();
-                    reason = event.getOption("reason").getAsString();
-                    savior = event.getUser();
 
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.red);
@@ -49,6 +49,7 @@ public class unban extends ListenerAdapter {
 
                 } else {
                     event.replyEmbeds(getDenyEmbed().build()).setEphemeral(true).queue();
+                    embedLog(event,true,"Unban Member", bannedU.getAsMention() + " has attempted to unban " + event.getUser().getAsMention() + " for **" + reason + "**");
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -62,25 +63,9 @@ public class unban extends ListenerAdapter {
     public void onButtonInteraction(ButtonInteractionEvent event) {
         if((savior == event.getUser()) && (event.getComponentId().equalsIgnoreCase("unbanCon"))) {
             event.getInteraction().getMessage().delete().queue();
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Member Unbanned");
-            eb.setColor(getBotColor());
-            eb.setDescription(bannedU.getAsMention() + " has been unbanned by " + event.getUser().getAsMention() + " for **" + reason + "**");
 
-            event.getGuild().unban(bannedU).reason(reason).complete();
-
-            eb.setFooter(getTime(), event.getJDA().getSelfUser().getAvatarUrl());
-            String chan = null;
-
-            try {
-                chan = getPermissionValue(event.getGuild().getId(), "0", "SERVER_LOG_CHAN");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (CsvException e) {
-                throw new RuntimeException(e);
-            }
-
-            event.getGuild().getTextChannelById(chan).sendMessageEmbeds(eb.build()).queue();
+            event.getGuild().unban(bannedU).reason(reason).queue();
+            embedLog(event,false,"Unban Member", savior.getAsMention() + " has unbanned " + bannedU.getAsMention() + " for **" + reason + "**");
         } if((savior == event.getUser()) && (event.getComponentId().equalsIgnoreCase("unbanDeny"))) {
             event.getInteraction().getMessage().delete().complete();
         }

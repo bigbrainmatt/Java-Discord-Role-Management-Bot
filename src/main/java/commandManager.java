@@ -1,3 +1,4 @@
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import roleRelated.copyPerms;
 import roleRelated.listPerms;
 import roleRelated.permissions;
@@ -13,13 +14,11 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import roleRelated.setRequestChannel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class commandManager extends ListenerAdapter {
-
-
-    @Override
-    public void onGuildReady(GuildReadyEvent event) {
+    public static List data() {
         List<CommandData> commandData = new ArrayList<>();
         // Refreance
         // commandData.add(Commands.slash("example", "example").addOptions(new class().getOptionsAdd().get(0)));
@@ -67,8 +66,25 @@ public class commandManager extends ListenerAdapter {
                 .addOptions(new listPerms().getOptions().get(1))
                 .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
 
+        // List all rol permissions
+        commandData.add(Commands.slash("listallperms", "List all perms given to any user/role")
+                .addOptions(new listPerms().getOptions().get(1))
+                .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
 
-        event.getGuild().updateCommands().addCommands(commandData).queue();
+        return commandData;
     }
+
+
+    @Override
+    public void onGuildReady(GuildReadyEvent event) {
+        event.getGuild().updateCommands().addCommands(data()).queue();
+    }
+
+    /*
+    @Override
+    public void onGuildJoin(GuildJoinEvent event) {
+        event.getGuild().updateCommands().addCommands(data()).queue();
+    }
+    */
 }
 
