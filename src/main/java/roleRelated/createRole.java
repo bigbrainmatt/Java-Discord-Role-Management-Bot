@@ -64,14 +64,6 @@ public class createRole extends ListenerAdapter {
         guild.modifyRolePositions()
                 .selectPosition(roleToMove)
                 .moveTo(newPosition)
-                .queue(
-                        success -> System.out.println("Role position updated successfully!"),
-                        error -> System.err.println("Failed to update role position: " + error.getMessage())
-                );
-    }
-
-    @Override
-    public void onMessageReactionAdd(MessageReactionAddEvent event) {
-        changeRoleHierarchy(event.getGuild(), event.getGuild().getRoleById("1326020147747491933"),event.getGuild().getRoleById("1325655621391089685").getPosition());
+                .queue();
     }
 }
