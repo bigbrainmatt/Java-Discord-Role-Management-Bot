@@ -51,7 +51,8 @@ public class main {
                 new setManager(),
                 new createEmbed(),
                 new editEmbed(),
-                new mangerRemove()
+                new mangerRemove(),
+                new createRole()
         );
 
     }

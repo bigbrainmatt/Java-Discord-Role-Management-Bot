@@ -100,6 +100,14 @@ public class commandManager extends ListenerAdapter {
                 .addOptions(new mangerRemove().getOptions().get(1))
         );
 
+        // Create role Cmd
+        commandData.add(Commands.slash("createrole", "Create an role")
+                .addOptions(new createRole().getOptions().get(0))
+                .addOptions(new createRole().getOptions().get(1))
+                .addOptions(new createRole().getOptions().get(2))
+                .addOptions(new createRole().getOptions().get(3))
+        );
+
 
         return commandData;
     }
