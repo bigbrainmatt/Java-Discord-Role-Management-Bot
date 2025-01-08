@@ -36,9 +36,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-
-.env
-.csv
-.json
-/guilds/perms
-/guilds/managers

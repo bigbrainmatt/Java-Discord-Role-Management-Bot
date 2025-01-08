@@ -5,6 +5,7 @@ import general.StartAndEnd;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import roleAssging.AssignRole;
+import roleAssging.tempRole;
 import roleAssging.unassignRole;
 import roleRelated.*;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -56,7 +57,8 @@ public class main {
                 new mangerRemove(),
                 new createRole(),
                 new AssignRole(),
-                new unassignRole()
+                new unassignRole(),
+                new tempRole()
         );
 
     }
