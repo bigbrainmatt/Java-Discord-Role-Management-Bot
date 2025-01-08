@@ -1,5 +1,7 @@
 import embed.editEmbed;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import roleAssging.AssignRole;
+import roleAssging.unassignRole;
 import roleRelated.*;
 import modderation.ban;
 import modderation.kick;
@@ -106,6 +108,18 @@ public class commandManager extends ListenerAdapter {
                 .addOptions(new createRole().getOptions().get(1))
                 .addOptions(new createRole().getOptions().get(2))
                 .addOptions(new createRole().getOptions().get(3))
+        );
+
+        // Assign role Cmd
+        commandData.add(Commands.slash("assignrole", "Create an role")
+                .addOptions(new AssignRole().getOptions().get(0))
+                .addOptions(new AssignRole().getOptions().get(1))
+        );
+
+        // Unassign role role Cmd
+        commandData.add(Commands.slash("unassignrole", "Create an role")
+                .addOptions(new unassignRole().getOptions().get(0))
+                .addOptions(new unassignRole().getOptions().get(1))
         );
 
 

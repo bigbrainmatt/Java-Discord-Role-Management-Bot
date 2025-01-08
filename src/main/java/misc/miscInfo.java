@@ -2,7 +2,9 @@ package misc;
 
 import com.opencsv.exceptions.CsvException;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 
@@ -84,4 +86,13 @@ public class miscInfo {
         event.getGuild().getTextChannelById(chan).sendMessageEmbeds(eb.build()).queue();
     }
 
+    public static boolean isRoleHigher(Member member, Role role) {
+        Role highestRole = member.getRoles().get(0);
+
+        if (highestRole == null) {
+            return true;
+        }
+
+        return role.getPosition() > highestRole.getPosition();
+    }
 }

@@ -4,6 +4,8 @@ import general.about;
 import general.StartAndEnd;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import roleAssging.AssignRole;
+import roleAssging.unassignRole;
 import roleRelated.*;
 import io.github.cdimascio.dotenv.Dotenv;
 import modderation.ban;
@@ -52,7 +54,9 @@ public class main {
                 new createEmbed(),
                 new editEmbed(),
                 new mangerRemove(),
-                new createRole()
+                new createRole(),
+                new AssignRole(),
+                new unassignRole()
         );
 
     }
