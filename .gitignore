@@ -40,4 +40,5 @@ build/
 .env
 .csv
 .json
-/guilds
+/guilds/perms
+/guilds/managers
