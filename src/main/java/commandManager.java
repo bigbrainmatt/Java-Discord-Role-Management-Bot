@@ -1,6 +1,7 @@
 import embed.editEmbed;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import roleAssging.AssignRole;
+import roleAssging.tempRole;
 import roleAssging.unassignRole;
 import roleRelated.*;
 import modderation.ban;
@@ -122,6 +123,12 @@ public class commandManager extends ListenerAdapter {
                 .addOptions(new unassignRole().getOptions().get(1))
         );
 
+        // Temp role Cmd
+        commandData.add(Commands.slash("temprole", "Add a role for a temporary amount of time")
+                .addOptions(new tempRole().getOptions().get(0))
+                .addOptions(new tempRole().getOptions().get(1))
+                .addOptions(new tempRole().getOptions().get(2))
+        );
 
         return commandData;
     }
