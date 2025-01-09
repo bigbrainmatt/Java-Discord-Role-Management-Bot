@@ -128,6 +128,8 @@ public class commandManager extends ListenerAdapter {
                 .addOptions(new tempRole().getOptions().get(0))
                 .addOptions(new tempRole().getOptions().get(1))
                 .addOptions(new tempRole().getOptions().get(2))
+                .addOptions(new tempRole().getOptions().get(3))
+
         );
 
         return commandData;
