@@ -51,7 +51,6 @@ A robust Java-based Discord bot designed to give users controlled access to mana
 | `/assignrole`        | Assigns a role to a user.                            |
 | `/unassignrole`      | Removes a role from a user.                          |
 | `/temprole`          | Temporarily assigns a role to a user.                |
-| `/giveaway`          | Starts a giveaway with configurable options.         |
 
 ## Dependencies
 
