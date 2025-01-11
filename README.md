@@ -1,4 +1,4 @@
-# Discord Role Management Bot
+# Java Discord Role Management Bot
 
 A robust Java-based Discord bot designed to give users controlled access to manage roles, kick, and ban members while restricting access to built-in Discord functions. The bot ensures granular control and customization, making it ideal for server moderation without compromising security.
 
