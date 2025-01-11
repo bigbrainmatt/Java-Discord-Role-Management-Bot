@@ -147,16 +147,16 @@ public class commandManager extends ListenerAdapter {
     }
 
 
-    @Override
+    /*@Override
     public void onGuildReady(GuildReadyEvent event) {
         event.getGuild().updateCommands().addCommands(data()).queue();
     }
 
-    /*
+     */
+
     @Override
     public void onGuildJoin(GuildJoinEvent event) {
         event.getGuild().updateCommands().addCommands(data()).queue();
     }
-    */
 }
 
