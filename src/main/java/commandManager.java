@@ -1,4 +1,5 @@
 import embed.editEmbed;
+import giveaway.giveawayStart;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import roleAssging.AssignRole;
 import roleAssging.tempRole;
@@ -131,6 +132,16 @@ public class commandManager extends ListenerAdapter {
                 .addOptions(new tempRole().getOptions().get(3))
 
         );
+
+        commandData.add(Commands.slash("giveaway", "Start a giveaway")
+                .addOptions(new giveawayStart().getOptions().get(0))
+                .addOptions(new giveawayStart().getOptions().get(1))
+                .addOptions(new giveawayStart().getOptions().get(2))
+                .addOptions(new giveawayStart().getOptions().get(3))
+                .addOptions(new giveawayStart().getOptions().get(4))
+                .addOptions(new giveawayStart().getOptions().get(5))
+        );
+
 
         return commandData;
     }

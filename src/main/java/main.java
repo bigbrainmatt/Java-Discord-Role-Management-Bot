@@ -2,6 +2,7 @@ import embed.createEmbed;
 import embed.editEmbed;
 import general.about;
 import general.StartAndEnd;
+import giveaway.giveawayStart;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import roleAssging.AssignRole;
@@ -58,7 +59,8 @@ public class main {
                 new createRole(),
                 new AssignRole(),
                 new unassignRole(),
-                new tempRole()
+                new tempRole(),
+                new giveawayStart()
         );
 
     }

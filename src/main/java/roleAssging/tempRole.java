@@ -26,14 +26,14 @@ import static misc.miscInfo.isRoleHigher;
 
 public class tempRole extends ListenerAdapter {
 
-    private String msgID;
+    private static String msgID;
 
     public List<OptionData> getOptions() {
         List<OptionData> data = new ArrayList<>();
         data.add(new OptionData(OptionType.ROLE, "role", "Role needed", true));
         data.add(new OptionData(OptionType.USER, "user", "Person to assign role to", true));
         data.add(new OptionData(OptionType.INTEGER, "time", "How long to assign role", true));
-                data.add(new OptionData(OptionType.STRING, "type", "How long to assign role", true)
+        data.add(new OptionData(OptionType.STRING, "type", "How long to assign role", true)
                 .addChoice("hours", "hours")
                 .addChoice("days", "days")
                 .addChoice("months", "months")
@@ -44,28 +44,35 @@ public class tempRole extends ListenerAdapter {
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-        if(event.getName().equals("temprole")) {
+        if (event.getName().equals("temprole")) {
+            int time = event.getOption("time").getAsInt();
+            tempRoleExport(event, time);
+        }
+    }
+
+    public static void tempRoleExport(SlashCommandInteractionEvent event, int time) {
+
+        if (event.getName().equals("temprole")) {
             Role role = event.getOption("role").getAsRole();
             Member user = event.getOption("user").getAsMember();
-            int time = event.getOption("time").getAsInt();
             String type = event.getOption("type").getAsString();
 
-            if(!isRoleHigher(event.getMember(), role)) {
+            if (!isRoleHigher(event.getMember(), role)) {
                 throw new HierarchyException("");
             }
 
             try {
-                if(hasPermission(event.getGuild().getId(), event.getUser().getId(), "mass_tempRole_permissions") || hasPermission(event.getGuild().getId(), event.getUser().getId(), "guild_admin")) {
-                    if(!user.getRoles().contains(role)) {
+                if (hasPermission(event.getGuild().getId(), event.getUser().getId(), "mass_tempRole_permissions") || hasPermission(event.getGuild().getId(), event.getUser().getId(), "guild_admin")) {
+                    if (!user.getRoles().contains(role)) {
                         EmbedBuilder eb = new EmbedBuilder();
                         eb.setColor(Color.green);
                         eb.setTitle("Temp Role Active");
                         eb.setDescription(role.getAsMention() + " has been temporarily assigned to " + user.getAsMention() + " for " + time + " " + type + " by " + event.getUser().getAsMention());
                         eb.setFooter(getTime(), event.getJDA().getSelfUser().getAvatarUrl());
 
-                        event.getGuild().addRoleToMember(user,role).complete();
+                        event.getGuild().addRoleToMember(user, role).complete();
 
-                        String chan ="";
+                        String chan = "";
                         try {
                             chan = getPermissionValue(event.getGuild().getId(), "0", "SERVER_LOG_CHAN");
                         } catch (IOException e) {
@@ -89,19 +96,24 @@ public class tempRole extends ListenerAdapter {
                         TimerTask task = new TimerTask() {
                             @Override
                             public void run() {
+
                             }
                         };
 
                         int allTime = time;
 
                         switch (type) {
-                            case "hours": allTime = ((time * 60) * 60) * 100;
+                            case "hours":
+                                allTime = ((time * 60) * 60) * 100;
                                 break;
-                            case "days": allTime = (((time * 60) * 60) * 24) * 100;
+                            case "days":
+                                allTime = (((time * 60) * 60) * 24) * 100;
                                 break;
-                            case "months": allTime = ((((time * 60) * 60) * 24) * 30) * 100;
+                            case "months":
+                                allTime = ((((time * 60) * 60) * 24) * 30) * 100;
                                 break;
-                            case "years": allTime = (((((time * 60) * 60) * 24) * 30) * 12) * 100;
+                            case "years":
+                                allTime = (((((time * 60) * 60) * 24) * 30) * 12) * 100;
                                 break;
                         }
 
@@ -119,11 +131,11 @@ public class tempRole extends ListenerAdapter {
 
                                 event.getGuild().getTextChannelById(finalChan).sendMessageEmbeds(eb.build()).queue();
 
-                                event.getGuild().removeRoleFromMember(user,role).complete();
+                                event.getGuild().removeRoleFromMember(user, role).complete();
 
                                 timer.cancel();
                             }
-                        }, 10000);
+                        }, 0);
                     } else {
                         event.reply("User already has this role").setEphemeral(true).queue();
                     }
@@ -132,10 +144,11 @@ public class tempRole extends ListenerAdapter {
                 throw new RuntimeException(e);
             } catch (CsvException e) {
                 throw new RuntimeException(e);
-            }catch (HierarchyException e) {
+            } catch (HierarchyException e) {
                 event.reply("Can't modify a role with higher or equal highest role than yourself!").setEphemeral(true).queue();
             }
-        }
-    }
 
+        }
+
+    }
 }
