@@ -8,6 +8,7 @@ A robust Java-based Discord bot designed to give users controlled access to mana
 2. Open the `.env` file in the project directory and add your bot token:
    ```env
    BOT_TOKEN=your-bot-token-here
+3. Then open the run.bat file and then your ready
 
 ## Features
 
