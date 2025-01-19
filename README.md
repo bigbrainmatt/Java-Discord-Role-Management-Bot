@@ -20,9 +20,8 @@ A robust Java-based Discord bot designed to give users controlled access to mana
   - List permissions assigned to roles or users.
   - View all permissions configured in the server.
 
-- **Embeds & Giveaways**  
+- **Embeds**  
   - Create and edit visually appealing embeds.
-  - Manage giveaways with detailed options.
 
 - **Customization**  
   - Set a request channel for role-related actions.
