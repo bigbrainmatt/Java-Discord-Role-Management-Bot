@@ -2,6 +2,13 @@
 
 A robust Java-based Discord bot designed to give users controlled access to manage roles, kick, and ban members while restricting access to built-in Discord functions. The bot ensures granular control and customization, making it ideal for server moderation without compromising security.
 
+## Setup
+
+1. Go to the [Discord Developer Portal](https://discord.com/developers/applications), create a new bot, and give it the necessary permissions (including Administrator).
+2. Open the `.env` file in the project directory and add your bot token:
+   ```env
+   BOT_TOKEN=your-bot-token-here
+
 ## Features
 
 - **Role Management**  
