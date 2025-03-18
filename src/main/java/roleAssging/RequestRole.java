@@ -1,6 +1,5 @@
 package roleAssging;
 
-import OldCode.appeals.Libs.TextFileUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
